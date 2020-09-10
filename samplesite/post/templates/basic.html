@@ -1,0 +1,34 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}Главная{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+	<header>
+		<h1>{% block post %}Посты{% endblock %}</h1>
+		{% if user.is_authenticated %}
+        	<h4>Hi {{ user.username }}!</h4>
+        {% else %}
+        <h4>Вы не авторизованы</h4>
+      	{% endif %}
+	</header>
+	<nav>
+		<a href="{% url 'index' %}">
+			<h4>Главная</h4>
+		</a>
+		{% block login %}{% endblock %}
+		{% block logout %}{% endblock %}
+		{% block admin %}{% endblock %}
+	</nav>
+	<section>
+		{% block content %}
+		{% endblock %}
+	</section>
+</body>
+</html>

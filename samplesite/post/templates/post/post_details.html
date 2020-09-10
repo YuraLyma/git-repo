@@ -1,0 +1,42 @@
+{% extends "basic.html" %}
+
+
+
+{% block title %}
+Пост
+{% endblock %}
+
+{% block post %}
+<h2>{{ current_post.title }}</h2>
+{% endblock %}
+
+{% block content %}
+<h3>Автор: {{ current_post.author }}</h3>
+<div>
+	{% if current_post.image.url != '' %}
+	<p>
+		<img src="{{ current_post.image.url }}" alt="{{ current_post.image.url }}">
+	</p>
+	{% else %}
+	<p></p>
+	{% endif %}
+	<p>
+		<span class="post_content">{{ current_post.content }}</span>
+	</p>
+	<p class="publication_time">
+		<small>
+			Время публикации: {{ current_post.publication_time|date:"d.m.Y H:i:s" }}
+		</small>
+		<br>
+		<small>
+			Время создания: {{ current_post.time_of_creation|date:"d.m.Y H:i:s" }}
+		</small>
+		<br>
+		<small>
+			Время последнего изменения: {{ current_post.last_update|date:"d.m.Y H:i:s" }}
+		</small>
+		<br>
+		<span>Тег(и): {{ tags|join:', ' }}</span>
+	</p>
+</div>
+{% endblock %}
